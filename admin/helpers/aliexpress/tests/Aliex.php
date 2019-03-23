@@ -59,8 +59,8 @@ class AliexIOTest   {
  
     public function testAliexIO($keyword,$pageNo,$pageSize,$sort,$originalPriceFrom,$originalPriceTo,$startCreditScore,$endCreditScore, $currency, $category_id)
     {
-        $language = get_option('language');
-        $currency = get_woocommerce_currency();
+		
+
         $conf = new GenericConfiguration();
         $this->aliconfig($conf);
         $aliexIO = new AliexIO($conf);
@@ -68,7 +68,7 @@ class AliexIOTest   {
         $listproducts = new ListProducts();
         $listproducts->setFields('productId,productTitle,productUrl,imageUrl,allImageUrls,localPrice,salePrice,discount,evaluateScore,originalPrice,commission,commissionRate,30daysCommission,volume,packageType,lotNum,validTime');
 
-        $listproducts->setLanguage($language);
+
 		$listproducts->setLocalCurrency($currency);
 		$listproducts->setSort($sort);
 		$listproducts->setPageNo($pageNo);
@@ -95,27 +95,16 @@ class AliexIOTest   {
 
     public function testGetProductDetail($product_id, $currency )
     {
-        $currency = get_woocommerce_currency();
-        $language = get_option('language');
 		 $conf = new GenericConfiguration();
         $this->aliconfig($conf);
-      //  print_r ($conf);
          $aliexIO= new AliexIO($conf);
-
-
 		   $listproductdetails = new GetProductDetail();
-		  $listproductdetails->setFields('productId,productTitle,productUrl,imageUrl,allImageUrls,localPrice,salePrice,discount,evaluateScore,originalPrice,commission,commissionRate,30daysCommission,volume,packageType,lotNum,validTime');
-       // $listproductdetails->setFields('productId,productTitle,productUrl,imageUrl,localPrice,salePrice,discount,evaluateScore,originalPrice');
-
-
-
-        $listproductdetails->setProductId($product_id);
+		     $listproductdetails->setFields('productId,productTitle,productUrl,imageUrl,allImageUrls,localPrice,salePrice,discount,evaluateScore,originalPrice,commission,commissionRate,30daysCommission,volume,packageType,lotNum,validTime');
+		 $listproductdetails->setProductId($product_id);
 		 $listproductdetails->setLocalCurrency($currency);
-        $listproductdetails->setLanguage($language);
-
 		  $formattedResponse =  $aliexIO->runOperation( $listproductdetails);
-
-		return   $formattedResponse;
+		
+		  	return   $formattedResponse;
     }
  
 

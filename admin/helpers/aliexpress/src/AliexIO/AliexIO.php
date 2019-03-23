@@ -38,7 +38,7 @@ class AliexIO
         }
 
         $requestObject = RequestFactory::createRequest($configuration);
-
+        
         $response = $requestObject->perform($operation);
 
         return $this->applyResponseTransformer($response, $configuration);
