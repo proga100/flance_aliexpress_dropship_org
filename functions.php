@@ -723,7 +723,7 @@ foreach ($_REQUEST['gal'][$_REQUEST['external_id']]  as $key=>$image_sel) {
 // add to import list
 	function import_add_ajax_request() {
 		
-	
+
 
     // The $_REQUEST contains all the data sent via ajax 
     if ( isset($_REQUEST) ) {
@@ -736,16 +736,18 @@ foreach ($cids as $cid) {
 			$imp =desc_import($cid); // import to 
 
 		$url =$imp->detail_url;
- //echo "<pre>";print_r ($imp);	
-		
+        // echo "<pre>";print_r ($imp);
+
 		$aliexpress_parse = apply_filters( 'ali_attribute_import',array($url, $cid));
 
-$attributes['simple_attributes'] = $aliexpress_parse['simple_attributes'];
-$attributes['product_attributes'] = $aliexpress_parse['product_attributes'];
-$attributes['product_calc'] = $aliexpress_parse['product_calc'];
+        $attributes['simple_attributes'] = $aliexpress_parse['simple_attributes'];
+        $attributes['product_attributes'] = $aliexpress_parse['product_attributes'];
+        $attributes['product_calc'] = $aliexpress_parse['product_calc'];
 
 
-$data = $imp; 
+$data = $imp;
+
+
 
 	$data->description =  $aliexpress_parse['fulldescription'];
   $data->attributes=  json_encode($attributes);
@@ -754,7 +756,7 @@ $data->import_list = 'yes';
 	
 		store_import($data);
 		 
-//	 print_r($data);exit;
+
 }
    
      $message =$cids;
@@ -777,6 +779,7 @@ $message = json_encode(array('message'=>$message, 'result'=>1, 'count'=>$newitem
     // Always die in functions echoing ajax content
    die();
 }
+
 
 
 

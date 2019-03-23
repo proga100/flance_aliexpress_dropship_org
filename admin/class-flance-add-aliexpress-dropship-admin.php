@@ -355,7 +355,7 @@ public  static function flance_aliexpress_categories(){
 
     }
 }
-	}
+
 	public static function flance_amp_admin_settings_get_product_cats(){
 		$product_cat = get_terms('product_cat', 'hide_empty=0');
 		$product_cat_option = (array)get_option('flance_amp_product_cat');

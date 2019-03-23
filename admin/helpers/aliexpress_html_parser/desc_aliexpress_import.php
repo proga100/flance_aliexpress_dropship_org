@@ -31,10 +31,6 @@ $opts = array(
 $co = 'aep_usuc_f=site=glo&b_locale=en_US;';
 
 
-
-
-
-
 $follow  = true;
 
 
@@ -46,7 +42,7 @@ $handle = curl_init();
  
 $url =$product_url;
 
-curl_setopt($handle, CURLOPT_HTTPHEADER, $opts['http']['header']);
+curl_setopt($url, CURLOPT_HTTPHEADER, $opts['http']['header']);
 // Set the url
 curl_setopt($handle, CURLOPT_URL, $url);
 // Set the result output to be a string.
@@ -69,6 +65,7 @@ if (preg_match('#\swindow.productDescription\s*=\s*(.*?);\s*$#ms', $desc_html->g
 	
 	$desc = substr($str, 0, -2);
 }
+
 
 
 

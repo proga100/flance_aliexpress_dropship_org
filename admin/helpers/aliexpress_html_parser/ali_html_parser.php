@@ -23,7 +23,7 @@ class aliexpress_parser {
 			/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.1.4
+	 * @since    1.1.2
 	 * @param      string    $Flance_wamp       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -40,6 +40,8 @@ public function attributes_import($product_array){
 
 	$product_url = $product_array[0];
 	$cid = $product_array[1];
+	
+	
 	include_once('desc_aliexpress_import.php');
 
 $attributes_html = $html->find('ul.sku-attr-list');
