@@ -70,8 +70,10 @@ if (!function_exists('flance_install_db')) {
   `import_list` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `publish_select` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL  
-  PRIMARY KEY (`type`,`external_id`,`variation_id`)
-  ) {$charset_collate} ENGINE=InnoDB;";
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+  
+  
+  ALTER TABLE {$table_name} DROP PRIMARY KEY, ADD PRIMARY KEY( `type`, `external_id`, `variation_id`); ";
 				
 				
 

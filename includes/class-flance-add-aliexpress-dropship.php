@@ -7,7 +7,7 @@
  * public-facing side of the site and the admin area.
  *
  * @link       http://www.flance.info
- * @since      1.1.2
+ * @since      1.1.4
  *
  * @package    Flance_aliexpress_dropship
  * @subpackage Flance_aliexpress_dropship/includes
@@ -22,7 +22,7 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.1.2
+ * @since      1.1.4
  * @package    Flance_aliexpress_dropship
  * @subpackage Flance_aliexpress_dropship/includes
  * @author     Rusty <tutyou1972@gmail.com>
@@ -33,7 +33,7 @@ class Flance_aliexpress_dropship {
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 * @access   protected
 	 * @var      Flance_aliexpress_dropship_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
@@ -42,7 +42,7 @@ class Flance_aliexpress_dropship {
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 * @access   protected
 	 * @var      string    $Flance_wamp    The string used to uniquely identify this plugin.
 	 */
@@ -51,7 +51,7 @@ class Flance_aliexpress_dropship {
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 * @access   protected
 	 * @var      string    $version    The current version of the plugin.
 	 */
@@ -64,12 +64,12 @@ class Flance_aliexpress_dropship {
 	 * Load the dependencies, define the locale, and set the hooks for the admin area and
 	 * the public-facing side of the site.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 */
 	public function __construct() {
 
 		$this->Flance_wamp = 'flance-add-aliexpress-dropship';
-		$this->version = '1.1.2';
+		$this->version = '1.1.4';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -91,7 +91,7 @@ class Flance_aliexpress_dropship {
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -136,7 +136,7 @@ class Flance_aliexpress_dropship {
 	 * Uses the Flance_aliexpress_dropship_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 * @access   private
 	 */
 	private function set_locale() {
@@ -152,7 +152,7 @@ class Flance_aliexpress_dropship {
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
@@ -165,7 +165,7 @@ class Flance_aliexpress_dropship {
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'flance_amp_admin_menu_page' );
 		//$this->loader->add_action( 'widgets_init', $plugin_admin, 'flance_widget' );
 		// Redirection after activation
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'flance_amp_plugin_redirect' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'flance_amp_dropship_plugin_redirect' );
 	//	do_action( 'flance_import_aliexpress_product_search_results');// search results pages hook 
 	//	add_action( 'flance_import_aliexpress_product_search_results',$this->flance_import_aliexpress_product_search_results() );
 
@@ -177,7 +177,7 @@ class Flance_aliexpress_dropship {
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 * @access   private
 	 */
 	private function define_public_hooks() {
@@ -202,7 +202,7 @@ class Flance_aliexpress_dropship {
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 */
 	public function run() {
 		$this->loader->run();

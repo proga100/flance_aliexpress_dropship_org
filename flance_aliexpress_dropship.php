@@ -9,7 +9,7 @@
  * that starts the plugin.
  *
  * @link              http://www.flance.info
- * @since             1.1.2
+ * @since             1.1.5
  * @package           Flance_aliexpress_dropship
  *
  * @wordpress-plugin
@@ -17,7 +17,7 @@
  * Description:       The plugin gives to import products from Aliexpress Into your wordpress ecommerce site and  create the site with specific aliexpress products. It easily imports products from  Aliexpress. Once uploading process is completed, uploaded items will appear in woocommerce section.
 
 The component uses  the Aliexpress official providers APIs.     
- * Version:           1.1.2
+ * Version:           1.1.5
  * Author:            Rusty 
  * Author URI:        http://www.flance.info
  * Text Domain:       flance_aliexpress_dropship
@@ -71,7 +71,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-flance-add-aliexpress-drop
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.1.2
+ * @since    1.1.4
  */
 function run_flance_add_aliexpress_dropship() {
 

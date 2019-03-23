@@ -337,7 +337,7 @@ border: 1px solid #ccc;
 .it_right {
    position: absolute;
     top: 200px;
-    right: -5px;
+    right: 10px;
     background: #3071a9;
     z-index: 100;
     /* border: 2px solid #a1a1a1; */

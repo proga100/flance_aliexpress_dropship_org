@@ -92,10 +92,10 @@ if( isset($purchase_data['verify-purchase']['buyer']) ) {
 // save the 
 function store($data)
 	{
-		
-		global $wpdb;
-		$product_id_form= $_POST['product_id'];
-		$currency = $_POST['vir_currency'];
+
+        global $wpdb;
+		$product_id_form= $_REQUEST['product_id'];
+		$currency = get_woocommerce_currency();
 		$proftable =  new stdClass();
 
 
@@ -119,7 +119,7 @@ function store($data)
 	$proftable->title= $product->productTitle;
 	$proftable->subtitle= null;
 	$proftable->description= $product->productTitle;
-	$proftable->keywords= $_POST['keyword'];
+	$proftable->keywords= $_REQUEST['keyword'];
 
 
 		$arr= (array)  $product;
@@ -140,20 +140,20 @@ if(empty($product->commission)) $product->commission = '';
 //	$proftable->localprice= $product->localPrice;
 	$proftable->regular_price= $product->originalPrice;
 	$proftable->curr= $currency ;
-	$proftable->category_id= $_POST['affiliate_cat_id'];
+	$proftable->category_id= $_REQUEST['affiliate_cat_id'];
 	$proftable->category_name= null;
-	$proftable->link_category_id= $_POST['vir_cat'];
+	$proftable->link_category_id= $_REQUEST['vir_cat'];
 	$proftable->additional_meta= null;
 	$proftable->user_image= $product->imageUrl;
 	$proftable->user_photos= null;
 	$proftable->user_title= $product->productTitle;
 	$proftable->user_subtitle= null;
 	$proftable->user_description=$product->productTitle;
-	$proftable->user_keywords= $_POST['keyword'];
+	$proftable->user_keywords= $_REQUEST['keyword'];
 	$proftable->user_price= $product->salePrice;
 	$proftable->user_regular_price= $product->originalPrice;
 	$proftable->user_schedule_time= null;
-	//$proftable->currency = $currency;
+	$proftable->currency = $currency;
 	
 		 // print_r ($proftable->store(true));exit;
 	//print_r ($proftable);	
@@ -188,7 +188,9 @@ $wpdb->replace(
 	$proftable->title= $product->productTitle;
 	$proftable->subtitle= null;
 	$proftable->description= $product->productTitle;
-	$proftable->keywords= $app->input->get('keyword');
+
+
+            $proftable->keywords= $_REQUEST['keyword'];
 
 
 
@@ -212,16 +214,16 @@ $wpdb->replace(
 		$proftable->localprice= $product->localPrice;
 	$proftable->regular_price= $product->originalPrice;
 	$proftable->curr= $currency ;
-	$proftable->category_id= $app->input->get('affiliate_cat_id');
+	$proftable->category_id= $_REQUEST['affiliate_cat_id'];
 	$proftable->category_name= null;
-	$proftable->link_category_id= $app->input->get('vir_cat');
+	$proftable->link_category_id= $_REQUEST['vir_cat'];
 	$proftable->additional_meta= null;
 	$proftable->user_image= $product->imageUrl;
 	$proftable->user_photos= null;
 	$proftable->user_title= $product->productTitle;
 	$proftable->user_subtitle= null;
 	$proftable->user_description=$product->productTitle;
-	$proftable->user_keywords= $app->input->get('keyword');
+	$proftable->user_keywords= $_REQUEST['keyword'];
 	$proftable->user_price= $product->salePrice;
 	$proftable->user_regular_price= $product->originalPrice;
 	$proftable->user_schedule_time= null;

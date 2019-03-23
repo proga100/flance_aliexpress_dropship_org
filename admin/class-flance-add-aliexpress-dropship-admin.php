@@ -4,7 +4,7 @@
  * The admin-specific functionality of the plugin.
  *
  * @link       http://www.flance.info
- * @since      1.1.2
+ * @since      1.1.4
  *
  * @package    Flance_aliexpress_dropship Pro
  * @subpackage Flance_aliexpress_dropship/admin
@@ -27,7 +27,7 @@ class Flance_aliexpress_dropship_Admin  {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 * @access   private
 	 * @var      string    $Flance_wamp    The ID of this plugin.
 	 */
@@ -36,7 +36,7 @@ class Flance_aliexpress_dropship_Admin  {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -45,7 +45,7 @@ class Flance_aliexpress_dropship_Admin  {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 * @param      string    $Flance_wamp       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -59,7 +59,7 @@ class Flance_aliexpress_dropship_Admin  {
 	/**
 	 * Register the stylesheets for the admin area.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 */
 	public function enqueue_styles() {
 		// WooCommerce credentials.
@@ -82,7 +82,7 @@ class Flance_aliexpress_dropship_Admin  {
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 */
 	public function enqueue_scripts() {
 		
@@ -164,6 +164,8 @@ add_submenu_page(
 	
 		register_setting( 'flance-amp-settings-group', 'aliexpress_key' );
 		register_setting( 'flance-amp-settings-group', 'tracking_id' );
+		register_setting( 'flance-amp-settings-group', 'language' );
+		
 		
 	}
 
@@ -176,115 +178,119 @@ add_submenu_page(
 		include 'partials/html-admin-dashboard.php';
 	}
 		// Admin Search Page Function
-	public function flance_import_aliexpress_product_search() {
-$res =	$this->flance_import_aliexpress_product_search_input_values();
+public function flance_import_aliexpress_product_search() {
+    $res =	$this->flance_import_aliexpress_product_search_input_values();
+    include 'partials/html-admin-search.php';
+    if ($_GET['task'] == 'search') {
+        $results =$this->flance_import_aliexpress_product_search_results($res);
 
+        $product_id= $res['product_id'];
+        if($product_id =='') {
+            foreach ($results->result->products as $product) {
 
-		include 'partials/html-admin-search.php';
-		
-		if ($_GET['task'] == 'search') {
-	$results =$this->flance_import_aliexpress_product_search_results($res);
-	foreach ($results->result->products	as $product) {
+                $ids[] = $product->productId; // get aliexpress product ids from results
 
-	$ids[]=$product->productId; // get aliexpress product ids from results
-	
-	}
+            }
+        }elseif($product_id !=''){
+            $ids[]= $results->result->productId;
+            $results->result->products[]=$results->result;
+
+        }
+      //  echo "<pre>";print_r($results->result->products);
+      //  print_r($ids);
 
 	do_action( 'save_ae', $results); // insert the results to database
-	 do_action( 'get_results_ae',$ids); // get result from database
+	do_action( 'get_results_ae',$ids); // get result from database
 	
 	$data = get_results_ae($ids);
-include 'partials/html-admin-seach-results.php';
+    include 'partials/html-admin-seach-results.php';
 }
 
-
-		
-
-	if ($_GET['task'] == 'import_add') {
-	$pks = $_POST['cid'];
+    if ($_GET['task'] == 'import_add') {
+	    $pks = $_POST['cid'];
 	
 //foreach ($pks as $cid){
-			$message = json_encode(array('message'=>$pks, 'result'=>1));
+		$message = json_encode(array('message'=>$pks, 'result'=>1));
 			 
-				echo $message ;exit;
+		echo $message ;exit;
 			
 		//	}
+    }
 }
-	}
-		public function flance_import_aliexpress_product_search_input_values() {
+public function flance_import_aliexpress_product_search_input_values() {
 
-$var['keyword'] = $_GET['keyword'];
-$var['min_price'] = $_GET['min_price'];
-$var['max_price'] = $_GET['max_price'];
- $var['min_score'] = $_GET['min_score'];
-$var['woo_cat'] = $_GET['woo_cat'];
-$var['affiliate_cat_id'] = $_GET['affiliate_cat_id'];
+    $var['keyword'] = $_GET['keyword'];
+    $var['min_price'] = $_GET['min_price'];
+    $var['max_price'] = $_GET['max_price'];
+    $var['min_score'] = $_GET['min_score'];
+    $var['woo_cat'] = $_GET['woo_cat'];
+    $var['affiliate_cat_id'] = $_GET['affiliate_cat_id'];
+    $var['product_id'] = $_REQUEST['product_id'];
 
 
 return $var  ;
 		
-			}
+}
 			
 	
-		
-			
-		public function flance_import_aliexpress_product_search_results($res) {
-
-if (!empty($res['directionTable'])) {
-	$sort= $res['directionTable'];
-if ($sort == 'asc' ) $sort = 'orignalPriceUp';
-if ($sort == 'desc' ) $sort = 'orignalPriceDown';
+public function flance_import_aliexpress_product_search_results($res) {
+    // print_r($res);
+    if (!empty($res['directionTable'])) {
+        $sort= $res['directionTable'];
+         if ($sort == 'asc' ) $sort = 'orignalPriceUp';
+         if ($sort == 'desc' ) $sort = 'orignalPriceDown';
 
 
-}else {
-	
-	$sort=NUll;
-}
-$keyword= $res['keyword'];
-$product_id= $res['product_id'];
+    }else {
 
-if (!empty($res['limitstart'])) {
-$pageNo= $res['limitstart']+1;
-}else {
-	
-	$pageNo=NUll;
-}
-$currency= $res['vir_currency'];
+        $sort=NUll;
+    }
+    $keyword= $res['keyword'];
+    $product_id= $res['product_id'];
 
-$endCreditScore = $res['max_score'];
-$startCreditScore = $res['min_score'];
-$originalPriceFrom =$res['min_price'];
-$originalPriceTo =$res['max_price'];
+    if (!empty($res['limitstart'])) {
+        $pageNo= $res['limitstart']+1;
+    }else {
 
-if (!empty($res['limit'])) {
-$pageSize= $res['limit'];
-}else {
-	
-	$res['limit']=$pageSize=5;
-}
+        $pageNo=NUll;
+    }
+    $currency= $res['vir_currency'];
 
-$category_id = $res['affiliate_cat_id'];
+    $endCreditScore = $res['max_score'];
+    $startCreditScore = $res['min_score'];
+    $originalPriceFrom =$res['min_price'];
+    $originalPriceTo =$res['max_price'];
 
-$comparams['ali_api'] = get_option('aliexpress_key'); 
-$comparams['tracking_id'] = get_option('tracking_id'); 
+    if (!empty($res['limit'])) {
+        $pageSize= $res['limit'];
+    }else {
 
- include_once ("helpers/aliexpress/tests/Aliex.php");
+        $res['limit']=$pageSize=5;
+    }
+
+    $category_id = $res['affiliate_cat_id'];
+
+    $comparams['ali_api'] = get_option('aliexpress_key');
+    $comparams['tracking_id'] = get_option('tracking_id');
+
+    include_once ("helpers/aliexpress/tests/Aliex.php");
 
 
 
-if($product_id =='') $aliexpress_json = $Ali->testAliexIO($keyword,$pageNo,$pageSize,$sort,$originalPriceFrom,$originalPriceTo,$startCreditScore,$endCreditScore,$currency,$category_id );
-if($product_id !='') $aliexpress_json = $Ali->testGetProductDetail($product_id,$currency );
+    if($product_id =='') $aliexpress_json = $Ali->testAliexIO($keyword,$pageNo,$pageSize,$sort,$originalPriceFrom,$originalPriceTo,$startCreditScore,$endCreditScore,$currency,$category_id );
+    if($product_id !='') $aliexpress_json = $Ali->testGetProductDetail($product_id,$currency );
 
 
 
-	
-	
-		$data = json_decode($aliexpress_json);
-
-//print_r ($data);
 
 
- 
+    $data = json_decode($aliexpress_json);
+
+
+    //print_r ($data);
+
+
+
 
 return $data   ;
 		
@@ -315,38 +321,39 @@ return $data   ;
 	}
 public  static function flance_aliexpress_categories(){
 
-
+    $affiliate_cat_id =$_REQUEST['affiliate_cat_id'];
 	
 	$file = __DIR__."/ali_categories.json";
-if (file_exists(__DIR__."/ali_categories.json")) {
-	$string= file_get_contents($file);
-	
-	
-$json_a = json_decode($string, true);
-$html = '<select name="affiliate_cat_id">';
+    if (file_exists(__DIR__."/ali_categories.json")) {
+        $string= file_get_contents($file);
 
-foreach ($json_a["categories"] as $categorie) {
-	if ($affiliate_cat_id == $categorie["id"]) {
-		$selected = 'selected';
-		
-	}else{
-	$selected = '';	
-		
-	}
-	
-	if ($categorie["level"] ==1 ){
-	$html .= '<option '.$selected.'  value="'.$categorie["id"].'">'.$categorie["name"].'</option>';  
-	}elseif ($categorie["level"] >1 ){
-		
-	$html .= '<option '.$selected.'  value="'.$categorie["id"].'">-'.$categorie["name"].'</option>';  	
-		
-	}
-	
-}
-$html .= '</select>'; 
 
-return  $html;
+        $json_a = json_decode($string, true);
+        $html = '<select name="affiliate_cat_id">';
 
+        foreach ($json_a["categories"] as $categorie) {
+            if ($affiliate_cat_id == $categorie["id"]) {
+                $selected = 'selected';
+
+            }else{
+                $selected = '';
+
+            }
+
+            if ($categorie["level"] ==1 ){
+                $html .= '<option '.$selected.'  value="'.$categorie["id"].'">'.$categorie["name"].'</option>';
+            }elseif ($categorie["level"] >1 ){
+
+                $html .= '<option '.$selected.'  value="'.$categorie["id"].'">-'.$categorie["name"].'</option>';
+
+            }
+
+        }
+    $html .= '</select>';
+
+    return  $html;
+
+    }
 }
 	}
 	public static function flance_amp_admin_settings_get_product_cats(){
@@ -389,9 +396,9 @@ return  $html;
 		register_widget( 'Flance_aliexpress_dropship_Widget' );
 	}
 
-	public function flance_amp_plugin_redirect() {
-		if (get_option('flance_amp_do_activation_redirect', false)) {
-			delete_option('flance_amp_do_activation_redirect');
+	public function flance_amp_dropship_plugin_redirect() {
+		if (get_option('flance_amp_do_dropship_activation_redirect', false)) {
+			delete_option('flance_amp_do_dropship_activation_redirect');
 			wp_redirect( admin_url( 'admin.php?page=flance-add-aliexpress-dropship' ) );
 		}
 	}

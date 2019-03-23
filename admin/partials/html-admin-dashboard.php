@@ -60,7 +60,7 @@
 		
 		<img alt="Flance Aliexpress Dropship" src="<?php echo plugins_url() ?>/flance_aliexpress_dropship/assets/images/component-300.jpg">
 <ul class="list-striped">
-<li><b>Version:</b> 1.1.2</li>
+<li><b>Version:</b> 1.1.4</li>
 <li><b>Date:</b> October 2017</li>
 <li><b>Author:</b> <a href="mailto:tutyou1972@gmail.com">flance team</a></li>
 <li><b>Website:</b> <a href="https://www.flance.info" target="_blank">https://www.flance.info</a></li>

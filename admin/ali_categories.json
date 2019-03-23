@@ -5,6 +5,41 @@
             "name": "Apparel & Accessories",
             "level": "1"
         },
+              {
+                "id": "200000297",
+                "name": "Apparel & Accessories",
+                "level": "2"
+              },
+              {
+                "id": "200000663",
+                "name": "Costumes & Accessories",
+                "level": "2"
+              },
+              {
+                "id": "200000343",
+                "name": "Men's Clothing",
+                "level": "2"
+              },
+              {
+                "id": "200000532",
+                "name": "Novelty & Special Use",
+                "level": "2"
+              },
+              {
+                "id": "200003274",
+                "name": "Sportswears",
+                "level": "2"
+              },
+              {
+                "id": "200000666",
+                "name": "World Apparel",
+                "level": "2"
+              },
+              {
+                "id": "200000345",
+                "name": "Women's Clothing",
+                "level": "2"
+              },
         {
             "id": "34",
             "name": "Automobiles & Motorcycles",
@@ -12,7 +47,7 @@
         },
         {
             "id": "1501",
-            "name": "Baby Products",
+            "name": "Mother & Kids",
             "level": "1"
         },
         {
@@ -20,6 +55,11 @@
             "name": "Beauty & Health",
             "level": "1"
         },
+      {
+        "id": "200004360",
+        "name": "Books for Local Russian",
+        "level": "1"
+      },
         {
             "id": "7",
             "name": "Computer & Networking",
@@ -27,7 +67,7 @@
         },
         {
             "id": "13",
-            "name": "Construction & Real Estate",
+            "name": "Home Improvement",
             "level": "1"
         },
         {
@@ -35,16 +75,13 @@
             "name": "Consumer Electronics",
             "level": "1"
         },
-        {
-            "id": "100008578",
-            "name": "Customized Products",
-            "level": "1"
-        },
-        {
-            "id": "5",
-            "name": "Electrical Equipment & Supplies",
-            "level": "1"
-        },
+      {
+        "id": "5",
+        "name": "Electrical Equipment & Supplies",
+        "level": "1"
+      },
+
+
         {
             "id": "502",
             "name": "Electronic Components & Supplies",
@@ -81,20 +118,26 @@
             "level": "1"
         },
         {
-            "id": "200003590",
+            "id": "200001996",
             "name": "Industry & Business",
             "level": "1"
         },
+      {
+        "id": "36",
+        "name": "Jewelry & Accessories",
+        "level": "1"
+      },
         {
             "id": "1509",
-            "name": "Jewelry",
-            "level": "1"
+            "name": "Fashion Jewelry",
+            "level": "2"
         },
-        {
-            "id": "1511",
-            "name": "Watch",
-            "level": "1"
-        },
+      {
+        "id": "200001680",
+        "name": "Fine Jewelry",
+        "level": "2"
+      },
+
         {
             "id": "39",
             "name": "Lights & Lighting",
@@ -111,7 +154,7 @@
             "level": "1"
         },
         {
-            "id": "0509",
+            "id": "509",
             "name": "Phones & Telecommunications",
             "level": "1"
         },
@@ -125,11 +168,7 @@
             "name": "Shoes",
             "level": "1"
         },
-        {
-            "id": "200001075",
-            "name": "Special Category",
-            "level": "1"
-        },
+
         {
             "id": "18",
             "name": "Sports & Entertainment",
@@ -154,12 +193,8 @@
             "id": "320",
             "name": "Weddings & Events",
             "level": "1"
-        },
-        {
-            "id": "100003109",
-            "name": "Women's Clothing",
-            "level": "1"
         }
+
     ]
 
 }

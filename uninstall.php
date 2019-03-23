@@ -19,7 +19,7 @@
  * 
  *
  * @link       http://www.flance.info
- * @since      1.1.2
+ * @since      1.1.4
  *
  * @package    Flance_aliexpress_dropship_Pro
  */

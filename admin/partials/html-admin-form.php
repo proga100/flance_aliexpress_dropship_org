@@ -69,10 +69,51 @@
                 
                    
                 </td>
-            </tr>
-       
+</tr>
 
-        </table>
+         <tr valign="top">
+             <th scope="row">Language</th>
+             <td>
+                 <select name="language" id="language">
+                     <?php
+                     $languages = array(
+                         'en' => 'English',
+                         'pt' => 'Portuguese',
+                         'ru' => 'Russian',
+                         'es' =>  'Spanish',
+                         'fr'=> 'French',
+                         'id'=>'Indonesian',
+                         'it'=> 'Italian',
+                         'nl' => 'Dutch',
+                         'tr' =>'Turkish',
+                         'vi' =>'Vietnamese',
+                         'th' =>'Thai',
+                         'de' => 'German',
+                         'ko' => 'Korean',
+                         'ja' => 'Japan',
+                         'ar' =>'Arabic',
+                         'pl' =>'Polish',
+                         'he' => 'Hebrew'
+                     );
+                     foreach($languages as $key=>$lang){ ?>
+                         <option value="<?php echo $key ?>"  <?php if (get_option('language')==$key) echo "selected"; ?> ><?php echo $lang ?></option>
+
+
+                     <?php } ?>
+
+                 </select>
+
+
+                 <span class="description"> <code>Language of Aliexpress product</code> .</span>
+
+
+
+             </td>
+</tr>
+
+
+
+     </table>
 			 
 
         <?php submit_button(); ?>

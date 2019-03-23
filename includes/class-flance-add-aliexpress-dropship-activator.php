@@ -4,7 +4,7 @@
  * Fired during plugin activation
  *
  * @link       http://www.flance.info
- * @since      1.1.2
+ * @since      1.1.4
  *
  * @package    Flance_aliexpress_dropship
  * @subpackage Flance_aliexpress_dropship/includes
@@ -15,7 +15,7 @@
  *
  * This class defines all code necessary to run during the plugin's activation.
  *
- * @since      1.1.2
+ * @since      1.1.4
  * @package    Flance_aliexpress_dropship
  * @subpackage Flance_aliexpress_dropship/includes
  * @author     Rusty <tutyou1972@gmail.com>
@@ -27,7 +27,7 @@ class Flance_aliexpress_dropship_Activator {
 	 *
 	 * Long Description.
 	 *
-	 * @since    1.1.2
+	 * @since    1.1.4
 	 */
 	public static function activate() {
 		$product_cat_option = get_option('flance_amp_product_cat');
